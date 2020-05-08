@@ -9,14 +9,14 @@ import About from "./views/About"
 
 import "./index.less"
 
-const Compiler = require('vue-template-compiler')
+const Compiler = require('vue-template-compiler');
 const template =`<template>
     <div>
-        <div>.lazy</div></div></template>`
+        <div>.lazy</div></div></template>`;
 
 
-const result = Compiler.compile(template)
-console.info(result)
+const result = Compiler.compile(template);
+console.info(result);
 
 
 //
