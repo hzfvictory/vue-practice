@@ -26,36 +26,20 @@
 </template>
 
 <script>
+  import {getCurrentInstance, onMounted} from 'vue'
+
   export default {
-    name: 'app',
-    components: {},
-    props: {},
-    data() {
-      return {}
-    },
-    methods: {
-      drawCanvas() {
-        console.log(1);
-      }
-    },
-    filters: {},
-    watch: {},
-    computed: {},
-    async created() {
-      // const a = await fetch('www.jing999.cn/shay').then(res => res.json());
-      // console.log(a.aaa);
-    },
-    mounted() {
-      let canvas = this.$refs.canvas;
-      var ctx = canvas.getContext('2d');
-      ctx.beginPath();
-      ctx.moveTo(75, 50);
-      ctx.lineTo(100, 75);
-      ctx.lineTo(100, 25);
-      ctx.fillStyle = "#fff";
-      ctx.globalAlpha = 0.2;
-      ctx.fill();
-      console.log(ctx);
+
+    setup() {
+
+      onMounted(() => {
+        console.log(this);
+      });
+
+
+      const {ctx} = getCurrentInstance();
+      console.log(ctx.$router.currentRoute.value);
+      // console.log(ctx.$router.push("/home"))
     }
   }
 </script>

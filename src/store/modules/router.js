@@ -1,5 +1,6 @@
 import {routes} from "../../router/index"
 
+
 const router = {
   state: {
     list: routes

@@ -1,11 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import {createStore} from 'vuex'
 import getters from './getters'
 
 const path = require('path');
 
-
-Vue.use(Vuex);
 
 // 通过node的 require.context，获取所有的的文件目录
 const files = require.context('./modules', false, /\.js$/);
@@ -19,7 +16,7 @@ files.keys().forEach(key => {
 
 const debug = process.env.NODE_ENV !== 'production';
 
-const store = new Vuex.Store({
+const store = createStore({
   modules,
   getters, // 这里也可以写在modules里面
   strict: debug,
