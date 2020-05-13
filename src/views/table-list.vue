@@ -57,16 +57,16 @@
     },
     components: {TableList},
     methods: {
-      queryList() { // 子组件默认的请求名称
-        this.$nextTick(async () => {  // 因为当前算是父组件，当执行到父组件的created周期才会执行它的子组件，所以这个时候子组件的data的一些方法获取不到，或者可以在mounted周期里面执行异步请求
-          const {paginationOptions: {pageSize, currentPage}, handlePageData} = this.$refs.table; // 获取子组件mixins里面的参数
-          const {data: {items, page: {totalRecord}}} = await this.$fetch(`http://123.57.68.113:8064/role?pageSize=${pageSize}&pageNum=${currentPage}`, {
-            headers: {
-              Authentication: '1f429c65169fefc181899718e8183726938a8f3b6e4c3a8e86b49a9fec73e9604f9a909dc284c3ae97f0f7982e9bfdc6acc7d86822be65414d9c1b8f4166b02d4f9388adfce07284fb3113db202d75851a0a2cf8fe3471874e3013a3cf8b7d9187ca3b328ea6720946c47f1b43d62a04b58a912fdda23a12aedf2cf4f0d40127710cc8c7f512ac47'
-            },
-          });
-          handlePageData(items, totalRecord); // mixin里面统一处理
+      async queryList() { // 子组件默认的请求名称
+        // 因为当前算是父组件，当执行到父组件的created周期才会执行它的子组件，所以这个时候子组件的data的一些方法获取不到，或者可以在mounted周期里面执行异步请求
+        const {paginationOptions: {pageSize, currentPage}, handlePageData} = this.$refs.table; // 获取子组件mixins里面的参数
+        const {data: {items, page: {totalRecord}}} = await this.$fetch(`http://123.57.68.113:8064/role?pageSize=${pageSize}&pageNum=${currentPage}`, {
+          headers: {
+            Authentication: '1f429c65169fefc181899718e8183726938a8f3b6e4c3a8e86b49a9fec73e9604f9a909dc284c3ae97f0f7982e9bfdc6bfd191ca3beec8f2976a99af3ed7bf494f9388adfce07284fb3113db202d75851a0a2cf8fe34718781122c820673177aa19affc4fd0a081487e934f0d61ac3fd5346ce23f5cf58d52e0688bf2379933521a6859db1c4c301'
+          },
         });
+        handlePageData(items, totalRecord); // mixin里面统一处理
+
       },
       editHandle(...options) {
         console.log(options, '编辑');
@@ -76,7 +76,7 @@
       }
     },
     created() {
-      this.queryList();
+      this.$nextTick(this.queryList);
     },
     mounted() {
     }

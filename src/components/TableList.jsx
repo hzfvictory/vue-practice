@@ -5,13 +5,21 @@ export default {
   props: {
     otherTableParams: { // 设置table其他参数
       type: Object,
+      default: function () {
+        return {}
+      }
     },
     otherPaginationParams: { // 设置分页其他参数
       type: Object,
+      default: function () {
+        return {}
+      }
     },
     tableColumn: { // table的column
       type: Array,
-      default: []
+      default: function () {
+        return []
+      }
     },
     multiple: {
       type: Boolean,

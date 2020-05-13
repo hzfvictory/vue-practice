@@ -56,6 +56,12 @@ const table = {
       this.paginationOptions.pageSize = currentSize;
       this.paginationOptions.currentPage = 1;
       this.queryList ? this.queryList() :this.$parent.queryList()
+    },
+    // 搜索专用
+    handleSearchChange(currentPage = 1, pageSize = 10) {
+      this.paginationOptions.pageSize = pageSize;
+      this.paginationOptions.currentPage = currentPage;
+      this.queryList ? this.queryList() : this.$parent.queryList();
     }
   }
 };
