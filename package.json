@@ -9,6 +9,7 @@
     "analyze": "cross-env ANALYZE=true vue-cli-service build"
   },
   "dependencies": {
+    "browser-sync": "^2.26.7",
     "core-js": "^3.6.4",
     "element-ui": "^2.0.0-rc.1",
     "lodash.get": "^4.4.2",

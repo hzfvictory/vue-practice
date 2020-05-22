@@ -56,7 +56,8 @@
     onMounted,
     isRef,
     provide,
-    markRaw
+    markRaw,
+    readonly,
   } from 'vue'
 
   // import {useRoute, useRouter} from "vue-router"
@@ -124,8 +125,8 @@
         ctx.$store.commit('add');
       };
       const add = () => {
-        count.value += 1;
-        // console.log(state.msg = state.msg + '1');
+        // count.value += 1;
+        console.log(state.msg = state.msg + '1');
       };
 
 

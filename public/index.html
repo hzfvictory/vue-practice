@@ -1,16 +1,52 @@
 <!DOCTYPE html>
 <html lang="zh-ch">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-  </body>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+</body>
 </html>
+
+<script>
+  /*
+  * 先来一个简单的例子热热身
+  * */
+  const obj = {a: 'string', b: 'number'}
+
+  let proxy = new Proxy(obj, {
+    get(target, p, receiver) {
+      console.log(target, p, receiver, 'get');
+      return target[p]
+    },
+    set(target, p, value, receiver) {
+      console.log(target, p, value, receiver, 'set');
+      return value
+    },
+    deleteProperty(target, p) {
+    },
+    has(target, p) {
+      console.log(target, p, 'has');
+    },
+    ownKeys(target) {
+      Reflect.ownKeys(target)
+      console.log(target, 'ownKeys');
+    }
+  })
+
+  // console.log(proxy.a);
+  // console.log('a' in proxy);
+  console.log(Object.getOwnPropertyNames(proxy));
+  // console.log(proxy.a = 222);
+  // console.log(proxy);
+  // 到这就会发现一个问题，当我设置的时候 他会先执行get的方法，然后在执行set的方法。但是我是无心执行的get方法，怎么能避免执行get的方法
+
+</script>
