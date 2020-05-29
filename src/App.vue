@@ -47,19 +47,34 @@
                     <span>王老虎</span>
                 </el-header>
 
-                <el-main>
-                    <!--有一些需要缓存，有一些不需要缓存-->
-                    <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
-                        <keep-alive>
-                            <router-view v-if="$route.meta.keepAlive">
-                            </router-view>
-                        </keep-alive>
-                    </transition>
-                    <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
-                        <router-view v-if="!$route.meta.keepAlive">
+                <!--                <div @click="changeStore">-->
+                <!--                    {{includes}}-->
+                <!--                </div>-->
+                <!--                <div @click="changeStore2">-->
+                <!--                    {{includes}}-->
+                <!--                </div>-->
+
+                <!-- <el-main>-->
+                <!--有一些需要缓存，有一些不需要缓存-->
+
+                <!--                {{activeMenu}}-->
+
+                <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
+                    <keep-alive>
+                        <router-view v-if="$route.meta.keepAlive">
                         </router-view>
-                    </transition>
-                </el-main>
+                    </keep-alive>
+                </transition>
+                <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
+                    <router-view v-if="!$route.meta.keepAlive">
+                    </router-view>
+                </transition>
+
+                <!--                {{includes}}-->
+                <!--                <keep-alive :include="includes" exclude="" :max="10">-->
+                <!--                    <router-view/>-->
+                <!--                </keep-alive>-->
+
             </el-container>
         </el-container>
     </div>
@@ -79,9 +94,19 @@
       },
       ...mapGetters(['getRouter']),
       ...mapState({
-        num: state => state.router.list
-      })
+        num: state => state.router.list,
+        includes: state => state.router.includes,
+      }),
+
     },
+    methods: {
+      changeStore() {
+        this.$store.dispatch('changeList', '222');
+      },
+      changeStore2() {
+        this.$store.dispatch('changeList', 'tableLists');
+      }
+    }
   }
 </script>
 

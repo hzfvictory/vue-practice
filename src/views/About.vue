@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 2000px">
         <canvas ref="canvas" @click="drawCanvas"/>
 
         <h1 class="playful" aria-label="Wash your hands">

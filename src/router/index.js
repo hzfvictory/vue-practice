@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+const TableList = () => import(/* webpackChunkName: "group-foo" */ '../views/table-list.vue')
+
 Vue.use(VueRouter);
 
 export const routes = [
@@ -9,7 +11,6 @@ export const routes = [
     path: '/home',
     name: 'Home',
     component: () => import('../views/Home.vue'),
-    meta: {keepAlive: true}
   },
   {
     path: '/wel',
@@ -25,20 +26,38 @@ export const routes = [
     path: '/test',
     name: 'test',
     component: () => import('../views/test.vue'),
-    meta: {keepAlive: true}
   },
   {
     path: '/table-list',
     name: 'table-list',
-    component: () => import('../views/table-list.vue'),
+    component: TableList,
     meta: {keepAlive: true}
+  },
+  {
+    path: '/table-detail',
+    name: 'table-detail',
+    component: () => import('../views/table-detail.vue'),
   },
   {path: "*", redirect: "/wel"},
 ];
 
 const router = new VueRouter({
-  mode:'history',
-  routes
+  mode: 'history',
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(savedPosition)
+        }, 20)
+      })
+    } else {
+      if (from.meta.keepAlive) {
+        from.meta.scrollTop = document.documentElement.scrollTop;
+      }
+      return {x: 0, y: to.meta.scrollTop || 0}
+    }
+  }
 });
 
 export default router

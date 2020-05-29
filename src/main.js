@@ -9,14 +9,14 @@ import About from "./views/About"
 
 import "./index.less"
 
-const Compiler = require('vue-template-compiler');
-const template =`<template>
-    <div>
-        <div>.lazy</div></div></template>`;
-
-
-const result = Compiler.compile(template);
-console.info(result);
+// const Compiler = require('vue-template-compiler');
+// const template =`<template>
+//     <div>
+//         <div>.lazy</div></div></template>`;
+//
+//
+// const result = Compiler.compile(template);
+// console.info(result);
 
 
 //
@@ -57,9 +57,15 @@ console.info(result);
 Vue.config.productionTip = false;
 Vue.config.silent = true;
 
+/**
+ * $fetch
+ * @param  {string} url 请求地址
+ * @param  {object} options 额外的参数
+ */
+
 //  全局的方法
-Vue.prototype.$fetch = (url, optios) => {
-  return fetch(url, optios).then(e => e.json()).then(val => {
+Vue.prototype.$fetch = (url, options) => {
+  return fetch(url, options).then(e => e.json()).then(val => {
     return val
   });
 };
@@ -101,6 +107,37 @@ const mixin = {
   }
 };
 Vue.mixin(mixin);
+
+// router.beforeEach((to, from, next) => {
+//   console.log(to, from);
+//   if (from.name) {
+//     console.log(to.name === 'table-list' || from.name === 'table-detail' || from.name === 'table-list' || to.name === 'table-detail');
+//     if ((to.name === 'table-list' && from.name === 'table-detail') || (from.name === 'table-list' && to.name === 'table-detail')) {
+//       store.dispatch('changeList', 'tableLists');
+//     } else {
+//       store.dispatch('changeList', '111');
+//     }
+//   }
+//   next()
+// })
+//
+// router.afterEach((to, from) => {
+//   if (from.name === 'table-detail' && to.name === 'table-list') {
+//     let isRefresh = sessionStorage.getItem('isRefresh')
+//     console.log(isRefresh);
+//     if (isRefresh === '0') {
+//       sessionStorage.setItem('isRefresh', null)
+//       setTimeout(() => {
+//         // window.location.reload()
+//       })
+//
+//     } else {
+//       sessionStorage.setItem('isRefresh', '0')
+//     }
+//   } else if (from.name === 'table-list' && to.name === 'table-detail') {
+//     sessionStorage.setItem('isRefresh', '0')
+//   }
+// })
 
 new Vue({
   router,

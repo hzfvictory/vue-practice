@@ -5,7 +5,7 @@ export default {
   props: {
     otherTableParams: { // 设置table其他参数
       type: Object,
-      default: function () {
+      default () {
         return {}
       }
     },
@@ -30,7 +30,6 @@ export default {
     handleButtons(item, record) {
       // 处理操作部分按钮 -> 可以在外面自定义，必须是jsx
       if (item.handleButtons) return item.handleButtons(record);
-
       return (
         !!item.list.length && item.list.map((item) => {
           return (
@@ -47,8 +46,7 @@ export default {
           )
         })
       );
-    }
-
+    },
     // handleCurrentChange(val) {
     //   this.$emit('currentChange', val);
     // },
@@ -56,28 +54,10 @@ export default {
   mounted() {
   },
   render() {
-    const {tableOptions, paginationOptions, paginationOptionsMethod, tableOptionsMethod, otherTableParams, tableColumn, multiple} = this;
+    const {tableOptions, paginationOptions, paginationOptionsMethod,
+      tableOptionsMethod, otherTableParams, tableColumn, multiple} = this;
     return (
       <div>
-        <div
-          {...{
-            attrs: {
-              id: 'foo',
-            },
-            domProps: {
-              innerHTML: 'bar'
-            },
-            class: {
-              foo: true,
-              bar: false
-            },
-            style: {
-              color: 'red',
-              fontSize: '14px'
-            },
-          }}
-        />
-
         <el-table
           {...{
             props: {
@@ -146,7 +126,7 @@ export default {
               ...paginationOptions,
             },
             on: {
-              ...paginationOptionsMethod
+              ...paginationOptionsMethod,
             },
           }}
         />

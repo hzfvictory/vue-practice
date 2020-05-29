@@ -17,7 +17,7 @@ const table = {
         layout: "total, sizes, prev, pager, next",
         pageSizes: [10, 20, 30, 40],
         total: 0, // 应用列表总数量
-        pageSize: 10, // 当前分页数量
+        pageSize: 30, // 当前分页数量
         currentPage: 1, // 当前页数第一页
         showPage: false, // 是否显示分页组件,必须total总数也要小于当前要展示的页数
       },
