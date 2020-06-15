@@ -3,21 +3,19 @@ import {routes} from "../../router/index"
 const router = {
   state: {
     list: routes,
-    includes: 'tableLists'
+    includes: ['tableLists', 'tableDetail', "a", "b"]
   },
   mutations: {
     add(state, payload) {
-      console.log(payload);
       state.count++
     },
     change(state, payload) {
-      console.log(payload);
       state.includes = payload
     },
   },
   actions: {
-    changeList(context,payload) {
-      console.log(payload);
+    changeList(context, payload) {
+      // console.log(payload);
 
       context.commit('change', payload)
     },

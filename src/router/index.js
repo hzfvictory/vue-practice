@@ -15,23 +15,29 @@ export const routes = [
   {
     path: '/wel',
     name: 'About',
-    component: () => import('../views/About.vue')
+    component: () => import('../views/About.vue'),
+    meta: {keepAlive: true}
   },
   {
     path: '/menu',
     name: '右键菜单',
     component: () => import('../views/menu.vue')
+
   },
   {
     path: '/test',
     name: 'test',
     component: () => import('../views/test.vue'),
+
   },
   {
     path: '/table-list',
     name: 'table-list',
     component: TableList,
-    meta: {keepAlive: true}
+    meta: {keepAlive: true},
+    props: (route) => ({
+      id: 1008611
+    })
   },
   {
     path: '/table-detail',
@@ -49,7 +55,7 @@ const router = new VueRouter({
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve(savedPosition)
-        }, 20)
+        }, 50)
       })
     } else {
       if (from.meta.keepAlive) {

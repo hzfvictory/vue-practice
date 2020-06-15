@@ -76,7 +76,7 @@
         this.fullscreenLoading = true;
         const {data: {items, page: {totalRecord}}} = await this.$fetch(`http://123.57.68.113:8064/role?pageSize=${this.paginationOptions.pageSize}&pageNum=${this.paginationOptions.currentPage}`, {
           headers: {
-            Authentication: "1f429c65169fefc181899718e8183726938a8f3b6e4c3a8e86b49a9fec73e9604f9a909dc284c3ae97f0f7982e9bfdc6a5ab8d1c63a543b59603b63fa8fea4424f9388adfce07284fb3113db202d75851a0a2cf8fe3471878da73c862a108a89aa7cbcda911ccb76f02178c82463573393443bf0d144ff00019f60b0064f402fbb774dce40644227"
+            Authentication: this.$store.getters.token
           },
         });
         this.handlePageData(items, totalRecord);
@@ -98,6 +98,8 @@
       this.queryList()
     },
     mounted() {
+      console.log(this)
+
       // console.log(ReactDom.render(React.createElement("div", null, "Hello hzf", /*#__PURE__*/React.createElement("span", null, "12123")),app));
       // console.log(React.createElement("div", null, "Hello hzf", /*#__PURE__*/React.createElement("span", null, "12123")));
       //
@@ -106,7 +108,7 @@
       // let a = h('ul', {id: 'ol-list'}, ['123123',
       //   h('li', {class: 'item1', style: "list-style: none"}, ['Item1']),
       //   h('li', {class: 'item2', id: 'li2', style: "color: pink", onclick: 'printStr ()'}, ['Item2']),
-      //   h('li', {class: 'item3', onclick: 'alert(1234)'}, ['Item3'])
+      //   h('li', {class: 'item3', onclick: 'Alert(1234)'}, ['Item3'])
       // ])
       // console.log(a);
     },

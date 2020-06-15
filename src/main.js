@@ -1,25 +1,25 @@
 import Vue from 'vue'
+
 import App from './App.vue'
 import router from './router'
 import store from "./store"
-import "normalize.css"
 
 import "./plugins/element"
-import About from "./views/About"
+import "./plugins/selfCom"
 
+import "normalize.css"
 import "./index.less"
 
+// 审查AST
 // const Compiler = require('vue-template-compiler');
 // const template =`<template>
 //     <div>
 //         <div>.lazy</div></div></template>`;
-//
-//
 // const result = Compiler.compile(template);
 // console.info(result);
 
 
-//
+// 错误捕获
 // Vue.config.errorHandler = function (err, vm, info) {
 //   // #处理错误信息, 进行错误上报
 //   // #err错误对象
@@ -38,14 +38,7 @@ import "./index.less"
 //   console.log('----1111----', name);
 //   console.log('----1111----', message);
 //   console.log('----1111----', stack);
-//
-//   console.log('----12121----', err);
-//   console.log('----2222----', vm,);
-//   console.log('----3333----', info);
-//
 //   console.log(err, vm, info);
-//
-//
 //   // fetch("https://www.jing999.cn/api/article-categories/5ea280a9580801552640323b").then((e) => e.json()).then((res) => {
 //   //   console.log(`%c store`, `color:#42b983`, 'aaaaa', res);
 //   // })
@@ -54,22 +47,7 @@ import "./index.less"
 //   // info为 Vue 特定的错误信息，比如错误所在的生命周期钩子
 // };
 
-Vue.config.productionTip = false;
-Vue.config.silent = true;
-
-/**
- * $fetch
- * @param  {string} url 请求地址
- * @param  {object} options 额外的参数
- */
-
-//  全局的方法
-Vue.prototype.$fetch = (url, options) => {
-  return fetch(url, options).then(e => e.json()).then(val => {
-    return val
-  });
-};
-
+// 全局的指令
 // Vue.directive('hasPermission', {
 //   bind(el, binding, vnode) {
 //     el.parentNode ? el.parentNode.removeChild(el) : el.style.display = 'none';
@@ -88,6 +66,51 @@ Vue.prototype.$fetch = (url, options) => {
 //   }
 // });
 
+// 路由守卫
+// router.afterEach((to, from) => {
+//   if (from.name && from.name !== 'table-detail' && to.name === 'table-list') {
+//     let isRefresh = sessionStorage.getItem('isRefresh')
+//     if (isRefresh === '0') {
+//       setTimeout(() => {
+//         window.location.reload()
+//       })
+//       sessionStorage.setItem('isRefresh', null)
+//     } else {
+//       sessionStorage.setItem('isRefresh', '0')
+//     }
+//   } else if (from.name === 'table-list' && to.name === 'table-detail') {
+//     sessionStorage.setItem('isRefresh', null)
+//   } else {
+//     sessionStorage.setItem('isRefresh', '0')
+//   }
+// })
+
+// 全局mixins
+// const mixin = {
+//   methods: {
+//     formatDate(dateTime) {
+//       return dateTime
+//     }
+//   }
+// };
+// Vue.mixin(mixin);
+
+
+Vue.config.productionTip = false;
+Vue.config.silent = true;
+
+/**
+ * $fetch
+ * @param  {string} url 请求地址
+ * @param  {object} options 额外的参数
+ */
+
+//  全局的方法
+Vue.prototype.$fetch = (url, options) => {
+  return fetch(url, options).then(e => e.json()).then(val => {
+    return val
+  });
+};
 
 // 全局自定义指令
 Vue.directive('gFocus', {
@@ -95,49 +118,8 @@ Vue.directive('gFocus', {
     el.focus()
   }
 });
-// 全局组件
-Vue.component("counter", About);
-
-// 全局mixins
-const mixin = {
-  methods: {
-    formatDate(dateTime) {
-      return dateTime
-    }
-  }
-};
-Vue.mixin(mixin);
-
-// router.beforeEach((to, from, next) => {
-//   console.log(to, from);
-//   if (from.name) {
-//     console.log(to.name === 'table-list' || from.name === 'table-detail' || from.name === 'table-list' || to.name === 'table-detail');
-//     if ((to.name === 'table-list' && from.name === 'table-detail') || (from.name === 'table-list' && to.name === 'table-detail')) {
-//       store.dispatch('changeList', 'tableLists');
-//     } else {
-//       store.dispatch('changeList', '111');
-//     }
-//   }
-//   next()
-// })
-//
-// router.afterEach((to, from) => {
-//   if (from.name === 'table-detail' && to.name === 'table-list') {
-//     let isRefresh = sessionStorage.getItem('isRefresh')
-//     console.log(isRefresh);
-//     if (isRefresh === '0') {
-//       sessionStorage.setItem('isRefresh', null)
-//       setTimeout(() => {
-//         // window.location.reload()
-//       })
-//
-//     } else {
-//       sessionStorage.setItem('isRefresh', '0')
-//     }
-//   } else if (from.name === 'table-list' && to.name === 'table-detail') {
-//     sessionStorage.setItem('isRefresh', '0')
-//   }
-// })
+// vuex
+window._store = store
 
 new Vue({
   router,

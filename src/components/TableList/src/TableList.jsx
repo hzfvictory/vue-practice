@@ -1,4 +1,4 @@
-import table from "../mixins/table"
+import table from "../../../mixins/table"
 
 export default {
   mixins: [table],

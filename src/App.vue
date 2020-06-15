@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="content">
         <el-container style="height: 100vh">
             <el-aside width="170px" style="background-color: #191a23">
                 <el-menu
@@ -47,34 +47,34 @@
                     <span>王老虎</span>
                 </el-header>
 
-                <!--                <div @click="changeStore">-->
-                <!--                    {{includes}}-->
-                <!--                </div>-->
+                <div @click="changeStore">
+                    {{includes}}
+                    {{a.b}}
+                </div>
                 <!--                <div @click="changeStore2">-->
                 <!--                    {{includes}}-->
                 <!--                </div>-->
 
-                <!-- <el-main>-->
+
+                <!--                <el-main id="jasmine_content">-->
                 <!--有一些需要缓存，有一些不需要缓存-->
 
                 <!--                {{activeMenu}}-->
 
-                <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
-                    <keep-alive>
-                        <router-view v-if="$route.meta.keepAlive">
-                        </router-view>
-                    </keep-alive>
-                </transition>
-                <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">
-                    <router-view v-if="!$route.meta.keepAlive">
-                    </router-view>
-                </transition>
+                <!--                <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">-->
+                <!--                    <keep-alive :max="a.b">-->
+                <!--                        <router-view v-if="$route.meta.keepAlive"/>-->
+                <!--                    </keep-alive>-->
+                <!--                </transition>-->
+                <!--                <transition enter-active-class="animated zoomInLeft" leave-active-class="animated zoomOutRight">-->
+                <!--                    <router-view v-if="!$route.meta.keepAlive"/>-->
+                <!--                </transition>-->
 
-                <!--                {{includes}}-->
-                <!--                <keep-alive :include="includes" exclude="" :max="10">-->
-                <!--                    <router-view/>-->
-                <!--                </keep-alive>-->
-
+                {{includes}}
+                <keep-alive :include="includes" exclude="" max="1">
+                    <router-view/>
+                </keep-alive>
+                <!--                </el-main>-->
             </el-container>
         </el-container>
     </div>
@@ -85,7 +85,17 @@
 
   export default {
     name: 'app',
+    data() {
+      return {
+        a: {b: 2}
+      }
+    },
     created() {
+    },
+    mounted() {
+      this.$watch('a', val => {
+        console.log(val, 'lalaallalal');
+      }, () => true)
     },
 
     computed: {
@@ -101,7 +111,7 @@
     },
     methods: {
       changeStore() {
-        this.$store.dispatch('changeList', '222');
+        this.a.b = 0
       },
       changeStore2() {
         this.$store.dispatch('changeList', 'tableLists');
