@@ -13,7 +13,7 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
     "lodash.get": "^4.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
